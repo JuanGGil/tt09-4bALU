@@ -34,7 +34,7 @@ async def test_project(dut):
     dut.uio_in.value = 0 #Opcode ADD
     await ClockCycles(dut.clk, 10)
     dut._log.info(f" 1. b: {b} a: {a} Opcode: ADD, value of input is: {dut.ui_in.value}")
-    #dut._log.info(f" value of output is {dut.ou_out.value}.")
+    
     assert dut.uo_out.value == 2 and dut.uio_out.value == 0
 
     #testing ADD opcode:
