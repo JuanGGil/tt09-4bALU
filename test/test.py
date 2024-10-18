@@ -30,7 +30,7 @@ async def test_project(dut):
     b = 1
     a = 1 
 
-    dut.ui_in.value = (b>>8) + a
+    dut.ui_in.value = (b>>4) + a
     dut.uio_in.value = 0 #Opcode ADD
     await ClockCycles(dut.clk, 10)
     dut._log.info(f" 1. b: {b} a: {a} Opcode: ADD, value of input is: {dut.ui_in.value}")
