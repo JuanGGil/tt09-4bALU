@@ -94,9 +94,13 @@ async def test_project(dut):
             dut.ui_in.value = (a << 4) + b
             dut.uio_in.value = 3 #Opcode DIV
             await ClockCycles(dut.clk, 10)
-            dut._log.info(f"SUB case {i}. a: {a}, b: {b}, input: {dut.ui_in.value}, output: {dut.uo_out.value}")
-            assert (dut.uo_out.value >> 4) == ((a // b) & 15) if (b != 0) else 0 #Quotient
-            assert (dut.uo_out.value & 15) == ((a % b) & 15) if (b != 0) else 0 #Remainder
+            dut._log.info(f"DIV case {i}. a: {a}, b: {b}, input: {dut.ui_in.value}, output: {dut.uo_out.value}")
+            if (b != 0): 
+                assert (dut.uo_out.value >> 4) == ((a // b) & 15) #Quotient
+                assert (dut.uo_out.value & 15) == ((a % b) & 15) #Remainder
+            else:
+                assert (dut.uo_out.value >> 4) == 0 #Quotient
+                assert (dut.uo_out.value & 15) == 0 #Remainder
 
     dut._log.info(f"All possible DIV combinations successful, now testing all possible AND combinations")
     
