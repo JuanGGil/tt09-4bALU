@@ -165,10 +165,10 @@ async def test_project(dut):
             a = y
             i = i + 1
             dut.ui_in.value = (a << 4) + b
-            dut.uio_in.value = 4 #Opcode AND
+            dut.uio_in.value = 8 #Opcode ENC
             await ClockCycles(dut.clk, 10)
             dut._log.info(f"ENC case {i}. a: {a}, b: {b}, input: {dut.ui_in.value}, output: {dut.uo_out.value}")
-            assert (dut.uo_out.value & 255) == (((((a << 4) | b) & 255) ^ 171 ) & 255) # encryption
+            assert (dut.uo_out.value & 255) == ((((a << 4) | b) ^ 171 ) & 255) # encryption
 
     dut._log.info(f"All possible ENC combinations successful, finished all possible tests")
 
