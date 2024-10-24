@@ -164,7 +164,7 @@ async def test_project(dut):
             dut.uio_in.value = 4 #Opcode AND
             await ClockCycles(dut.clk, 10)
             dut._log.info(f"ENC case {i}. a: {a}, b: {b}, input: {dut.ui_in.value}, output: {dut.uo_out.value}")
-            assert (dut.uo_out.value & 255) == ((a << 4) | b) ^ 171 ) # encryption
+            assert (dut.uo_out.value & 255) == (((a << 4) | b) ^ 171 ) # encryption
 
     dut._log.info(f"All possible ENC combinations successful, finished all possible tests")
 
