@@ -48,9 +48,9 @@ async def test_project(dut):
             dut.uio_in.value = 0 #Opcode ADD
             await ClockCycles(dut.clk, 10)
             dut._log.info(f" ADD case {i}. b: {b} a: {a} Opcode: ADD, value of input is: {dut.ui_in.value}, SUM: {dut.uo_out.value}, UIO: {dut.uio_out.value}")
-            assert dut.uo_out.value == ((a+b) & 15)
-            assert (dut.uio_out.value >> 7) == (((a+b) & 16) >> 3)
-            assert (dut.uio_out.value >> 6) == (((a & 8) >> 2) & ((b & 8) >> 2) & ~(((a+b) & 8) >> 2)) or (~((a & 8) >> 2) & ~((b & 8) >> 2) & (((a+b) & 8) >> 2))
+            assert dut.uo_out.value == ((a+b) & 15) # SUM
+            assert (dut.uio_out.value >> 7) == (((a & 8) >> 2) & ((b & 8) >> 2) & ~(((a+b) & 8) >> 2)) or (~((a & 8) >> 2) & ~((b & 8) >> 2) & (((a+b) & 8) >> 2)) #Overflow
+            assert (dut.uio_out.value >> 6) == (((a+b) & 16) >> 3) # Carryout
 
     # Keep testing the module by changing the input values, waiting for
     # one or more clock cycles, and asserting the expected output values.
