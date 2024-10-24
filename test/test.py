@@ -67,7 +67,7 @@ async def test_project(dut):
             dut._log.info(f"SUB case {i}. a: {a}, b: {b}, input: {dut.ui_in.value}, output: {dut.uo_out.value}, UIO: {dut.uio_out.value}")
             assert dut.uo_out.value == ((a-b) & 15) # difference
             assert (dut.uio_out.value >> 7) == (((a & 8) >> 3) & ~((b & 8) >> 3) & ~(((a-b) & 8) >> 3)) or (~((a & 8) >> 3) & ((b & 8) >> 3) & (((a-b) & 8) >> 3)) #Overflow
-            assert ((dut.uio_out.value & 64) >> 6) == (((a-b) & 16) >> 4) # Carryout
+            assert ((dut.uio_out.value & 64) >> 6) == ((~(a-b) & 16) >> 4) # Carryout
             
     dut._log.info(f"All possible SUB combinations successful, now testing all possible MUL combinations")
 
