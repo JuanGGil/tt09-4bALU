@@ -9,11 +9,12 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-Explain how your project works
+This 4-bit ALU works by taking an 8-bit input, which is split in half to serve as two 4-bit inputs. The 4 LSBs of the 8-bit input is
+considered b, while the 4 MSBs of the 8-bit input is considered a. Using 
 
 ## How to test
 
-Explain how to use your project
+In the test.py the upper half 
 
 ## External hardware
 
